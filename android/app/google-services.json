@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "407196196062",
+    "firebase_url": "https://conversat-qa.firebaseio.com",
+    "project_id": "conversat-qa",
+    "storage_bucket": "conversat-qa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407196196062:android:437d99a6a614c6a52f764f",
+        "android_client_info": {
+          "package_name": "com.conversat.conversat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407196196062-hs91f86upp3kll0ttj2e35pu9temg542.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV0uJ62tfzeu5AfX1pSRFYXZVsU3X3exM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407196196062-hs91f86upp3kll0ttj2e35pu9temg542.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "407196196062-n2e9uosr42epbnhkk2s63gvm3q8vjk31.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.conversat.conversat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

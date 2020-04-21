@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>407196196062-n2e9uosr42epbnhkk2s63gvm3q8vjk31.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.407196196062-n2e9uosr42epbnhkk2s63gvm3q8vjk31</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4pLt6pyKz71jpMyAUXd6NsWAqDm8jTLs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>407196196062</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.conversat.conversat</string>
+	<key>PROJECT_ID</key>
+	<string>conversat-qa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>conversat-qa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:407196196062:ios:7a5a7a3ab3c351762f764f</string>
+	<key>DATABASE_URL</key>
+	<string>https://conversat-qa.firebaseio.com</string>
+</dict>
+</plist>
