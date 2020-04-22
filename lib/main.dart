@@ -1,3 +1,4 @@
+import 'package:Conversat/screens/home.screen.dart';
 import 'package:Conversat/screens/landing.screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -15,24 +16,21 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MultiProvider(
-      providers: [
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: NoOverScroll(),
+          child: child,
+        );
+      },
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        builder: (context, child) {
-          return ScrollConfiguration(
-            behavior: NoOverScroll(),
-            child: child,
-          );
-        },
-        navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())
-        ],
-        routes: {
-          '/': (context) => LandingScreen(),
-        },
-      ),
+      routes: {
+        '/': (context) => LandingScreen(),
+        '/home': (context) => HomeScreen(),
+      },
     );
   }
 }
