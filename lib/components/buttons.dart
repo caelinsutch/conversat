@@ -5,8 +5,9 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 class PurpleButton extends StatelessWidget {
 
   final VoidCallback onPressed;
+  final Widget child;
 
-  const PurpleButton({Key key, this.onPressed}) : super(key: key);
+  const PurpleButton({Key key, this.onPressed, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,6 @@ class PurpleButton extends StatelessWidget {
         ),
         textColor: Color.fromARGB(255, 255, 255, 255),
         padding: EdgeInsets.all(0),
-        child: Text(
-          "Login with Google",
-          textAlign: TextAlign.center,
-          style: TextStyles.h2White,
-        ));
+        child: child);
   }
 }

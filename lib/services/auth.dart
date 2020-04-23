@@ -14,7 +14,12 @@ class AuthService {
 
   Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
 
-  Future<FirebaseUser> googleSignIn() async {
+  /// Sign in with Google oAuth
+  ///
+  /// Returns [Future] true if the user is new
+  /// Return [Future] false if the user is new
+  /// Return [Future] null if the an error occurs (i.e. user doesn't exist)
+  Future<bool> googleSignIn() async {
     try {
       // Account
       GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -29,12 +34,19 @@ class AuthService {
       AuthResult result = await _auth.signInWithCredential(credential);
       FirebaseUser user = result.user;
       updateUserData(user);
-      return user;
+      DocumentReference userRef = _db.collection('users').document(user.uid);
+      DocumentSnapshot doc = await userRef.get();
+      if (doc.exists) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       return null;
     }
   }
 
+  /// Update the user database with information from the Firebase user
   Future<void> updateUserData(FirebaseUser user) {
     DocumentReference userRef = _db.collection('users').document(user.uid);
 
@@ -42,7 +54,6 @@ class AuthService {
       'uid': user.uid,
       'displayName': user.displayName,
       'email': user.email,
-      'lastActivity': DateTime.now()
     }, merge: true);
   }
 

@@ -14,6 +14,15 @@ class TextStyles {
     );
   }
 
+  static TextStyle get h1Grey {
+    return TextStyle(
+      color: AppColors.grey5,
+      fontFamily: mainFamily,
+      fontWeight: FontWeight.w700,
+      fontSize: 42,
+    );
+  }
+
   static TextStyle get h2Primary {
     return TextStyle(
       color: AppColors.primary,
@@ -32,8 +41,16 @@ class TextStyles {
     );
   }
 
+  static TextStyle get h3White {
+    return TextStyle(
+        color: Colors.white,
+        fontFamily: mainFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 18
+    );
+  }
+
   static const String mainFamily = "Visby Round CF";
   static const FontWeight mainWeight = FontWeight.w700;
   static const FontStyle mainStyle = FontStyle.normal;
-  static const double mainSize = 24;
 }

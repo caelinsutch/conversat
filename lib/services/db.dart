@@ -53,7 +53,7 @@ class UserData<T> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore db = Firestore.instance;
   static const String collection = 'users';
-=
+
   UserData();
 
   get user async {

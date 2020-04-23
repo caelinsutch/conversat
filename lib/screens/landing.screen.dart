@@ -1,7 +1,7 @@
 import 'package:Conversat/components/buttons.dart';
 import 'package:Conversat/services/auth.dart';
 import 'package:Conversat/shared/actions.dart';
-import 'package:Conversat/styles/appcolors.dart';
+import 'package:Conversat/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -59,6 +59,11 @@ class LandingScreen extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 25),
               child: PurpleButton(
                     onPressed: () async => this.onPressed(context),
+                child: Text(
+                  "Login with Google",
+                  textAlign: TextAlign.center,
+                  style: TextStyles.h2White,
+                ),
               ),
             ),
             Container(
@@ -82,10 +87,12 @@ class LandingScreen extends StatelessWidget {
   }
 
   void onPressed(context) async {
-    var authRes = await auth.googleSignIn();
+    bool authRes = await auth.googleSignIn();
     if (authRes == null) {
       FlutterActions.purpleSnackBarTop(context, 'Error logging in!');
-    } else {
+    } else if (authRes == false) {
+      Navigator.popAndPushNamed(context, '/finish-signup');
+    } else if (authRes == true) {
       Navigator.popAndPushNamed(context, '/home');
     }
   }

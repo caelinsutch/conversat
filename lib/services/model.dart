@@ -4,23 +4,22 @@
 ///
 class User {
   String uid; // UID linking to fireauth
-  String name; // Display name taken from Google
-  String userName; // Username that is displayed to other users
+  String displayName; // Display name taken from Google
   String email; // Users email
-  String bio; // A short bio that is shown on the userpage
-  int followers; // How many followers a user has
+  List<Notification> notifications;
 
   // Constructor for each user
-  User({this.uid, this.name, this.email, this.bio, this.followers});
+  User({this.uid, this.displayName, this.email, this.notifications});
 
   // Used when creating a user class from a map
   factory User.fromMap(Map data) {
     return User(
       uid: data['uid'] ?? '',
-      name: data['name'] ?? '',
+      displayName: data['name'] ?? '',
       email: data['email'] ?? '',
-      bio: data['bio'] ?? '',
-      followers: data['followers'] ?? 0,
+      notifications: (data['notifications'] as List ?? [])
+        .map((e) => Notification.fromMap(e))
+        .toList(),
     );
   }
 }
@@ -31,16 +30,21 @@ class User {
 ///
 class UserPublic {
   List<Question> questions; // List of users questions
+  String userName;
+  String profilePhoto;
+  String bio; // A short bio that is shown on the userpage
   List<String> followers; // Followers of the user uid
 
-  UserPublic({this.questions, this.followers});
+  UserPublic({this.questions, this.followers, this.userName, this.profilePhoto, this.bio});
 
   factory UserPublic.fromMap(Map data) {
     return UserPublic(
       questions: (data['questions'] as List ?? [])
           .map((e) => Question.fromMap(e))
           .toList(),
-      followers: data['followers'] as List ?? []
+      followers: (data['followers'] as List ?? []),
+      bio: data['bio'] ?? '',
+      userName: data['username'] ?? '',
     );
   }
 
@@ -60,6 +64,23 @@ class Question {
     return Question(
       question: data['question'] ?? '',
       answer: data['answer'] ?? '',
+    );
+  }
+}
+
+///
+/// Individual Notifications for each users
+///
+class Notification {
+  String title;
+  String body;
+
+  Notification({this.title, this.body});
+
+  factory Notification.fromMap(Map data) {
+    return Notification(
+      title: data['title'] ?? '',
+      body: data['answer'] ?? '',
     );
   }
 }
