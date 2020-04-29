@@ -1,6 +1,8 @@
 import 'package:Conversat/screens/home.screen.dart';
 import 'package:Conversat/screens/landing.screen.dart';
 import 'package:Conversat/screens/signup.screen.dart';
+import 'package:Conversat/services/services.dart';
+import 'package:Conversat/shared/globals.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +23,9 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiProvider(
       providers: [
-        StreamProvider<FirebaseUser>.value(value: AuthService().user)
+        StreamProvider<FirebaseUser>.value(value: AuthService().user),
+        StreamProvider<User>.value(value: Global.userRef.userDataStream()),
+        StreamProvider<UserPublic>.value(value: Global.userRef.userPublicDataStream())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,12 +35,15 @@ class MyApp extends StatelessWidget {
             child: child,
           );
         },
+        theme: ThemeData(
+          fontFamily: 'VisbyRoundedCF',
+        ),
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())
         ],
         routes: {
-          '/': (context) => SignupScreen(),
-          '/signup': (context) => LandingScreen(),
+          '/': (context) => LandingScreen(),
+          '/signup': (context) => SignupScreen(),
           '/home': (context) => HomeScreen(),
         },
       ),

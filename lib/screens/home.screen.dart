@@ -7,7 +7,12 @@ Widget build(BuildContext context) {
   return Scaffold(
     body: Container(
       child: Center(
-        child: Text("Home"),
+        child: RaisedButton(
+          child: Text('Signup'),
+          onPressed: () => {
+            Navigator.pushNamed(context, '/signup')
+          },
+        ),
       ),
     ),
   );

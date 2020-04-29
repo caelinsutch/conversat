@@ -105,21 +105,7 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.5+3"
-  firebase_auth_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_auth_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.7"
-  firebase_auth_web:
-    dependency: transitive
-    description:
-      name: firebase_auth_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
+    version: "0.14.0+9"
   firebase_core:
     dependency: "direct main"
     description:
@@ -154,7 +140,7 @@ packages:
       name: flushbar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.0"
+    version: "1.9.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -204,14 +190,14 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.4.3"
+    version: "4.4.4"
   google_sign_in_platform_interface:
     dependency: transitive
     description:
       name: google_sign_in_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   google_sign_in_web:
     dependency: transitive
     description:
@@ -225,7 +211,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.0+4"
+    version: "0.12.1"
   http_parser:
     dependency: transitive
     description:
@@ -302,7 +288,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.8.0+1"
   petitparser:
     dependency: transitive
     description:
@@ -323,7 +309,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.5"
+    version: "4.0.5+1"
   quiver:
     dependency: transitive
     description:
@@ -391,7 +377,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.11"
   typed_data:
     dependency: transitive
     description:

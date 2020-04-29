@@ -30,12 +30,12 @@ class User {
 ///
 class UserPublic {
   List<Question> questions; // List of users questions
-  String userName;
+  String username;
   String profilePhoto;
   String bio; // A short bio that is shown on the userpage
   List<String> followers; // Followers of the user uid
 
-  UserPublic({this.questions, this.followers, this.userName, this.profilePhoto, this.bio});
+  UserPublic({this.questions, this.followers, this.username, this.profilePhoto, this.bio});
 
   factory UserPublic.fromMap(Map data) {
     return UserPublic(
@@ -44,7 +44,7 @@ class UserPublic {
           .toList(),
       followers: (data['followers'] as List ?? []),
       bio: data['bio'] ?? '',
-      userName: data['username'] ?? '',
+      username: data['username'] ?? '',
     );
   }
 

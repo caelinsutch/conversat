@@ -50,7 +50,16 @@ class TextStyles {
     );
   }
 
-  static const String mainFamily = "Visby Round CF";
+  static TextStyle get h3Black {
+    return TextStyle(
+        color: AppColors.grey5,
+        fontFamily: mainFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 18
+    );
+  }
+
+  static const String mainFamily = "VisbyRoundedCF";
   static const FontWeight mainWeight = FontWeight.w700;
   static const FontStyle mainStyle = FontStyle.normal;
 }

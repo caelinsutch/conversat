@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:Conversat/components/buttons.dart';
 import 'package:Conversat/services/auth.dart';
+import 'package:Conversat/services/model.dart';
+import 'package:Conversat/shared/actions.dart';
 import 'package:Conversat/shared/forms.dart';
 import 'package:Conversat/shared/globals.dart';
 import 'package:Conversat/shared/validators.dart';
@@ -25,18 +27,19 @@ class _SignupScreenState extends State<SignupScreen> {
   AuthService auth = AuthService();
 
   Map<String, String> updatedUser = {
-    'userName': '',
+    'username': '',
     'bio': '',
   };
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FirebaseUser>(
-      builder: (context, user, child) {
-        this._uploadedFileUrl = user.photoUrl;
-        return  Scaffold(
-            backgroundColor: AppColors.grey1,
-            body: Container(
+    return Consumer2<FirebaseUser, UserPublic>(
+        builder: (context, user, userPublic, child) {
+      this._uploadedFileUrl = user.photoUrl;
+      return Scaffold(
+          backgroundColor: AppColors.grey1,
+          body: SingleChildScrollView(
+            child: Container(
               padding: EdgeInsets.all(20),
               child: Center(
                 child: Form(
@@ -49,44 +52,62 @@ class _SignupScreenState extends State<SignupScreen> {
                           'Finish Signup',
                           style: TextStyles.h1Primary,
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         GestureDetector(
                           onTap: chooseImage,
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(this._uploadedFileUrl),
-                            radius: 20,
+                            backgroundImage:
+                                NetworkImage(this._uploadedFileUrl),
+                            radius: 40,
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        FormFields.genericFormField(context, fieldSaveFunction('userName'), Validators.generic, 'Username'),
-                        SizedBox(height: 20,),
-                        FormFields.genericFormField(
-                          context,
-                          fieldSaveFunction('bio'),
-                          Validators.notEmpty,
-                          'Bio',
-                          minLines: 8,
-                          keyboardType: TextInputType.multiline,
+                        SizedBox(
+                          height: 20,
                         ),
-                        SizedBox(height: 20,),
+                        FormFields.genericFormField(
+                          context: context,
+                          saveFunction: fieldSaveFunction('username'),
+                          validatorFunction: Validators.notEmpty,
+                          hint: 'Username',
+                          minLines: 1,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.multiline,
+                          initialValue: userPublic?.username,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        FormFields.genericFormField(
+                          context: context,
+                          saveFunction: fieldSaveFunction('bio'),
+                          validatorFunction: Validators.notEmpty,
+                          hint: 'Bio',
+                          minLines: 8,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.multiline,
+                          initialValue: userPublic?.bio,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         PurpleButton(
                           child: Container(
                             padding: EdgeInsets.all(20),
-
                             child: Text(
-                                'Complete Profile',
+                              'Complete Profile',
                               style: TextStyles.h2White,
                             ),
                           ),
-                          onPressed: () async => submitForm(context),)
+                          onPressed: () async => submitForm(context),
+                        )
                       ],
-                    )
-                ),
+                    )),
               ),
-            )
-        );
-      }
-    );
+            ),
+          ));
+    });
   }
 
   void chooseImage() async {
@@ -111,11 +132,23 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void submitForm(context) async {
-    await uploadImage();
-    Global.userRef.upsertUser({
-      ...updatedUser,
-      'profilePhoto': _uploadedFileUrl
-    });
+    _autovalidate = true;
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      if (_image != null) {
+        await uploadImage();
+      }
+      try {
+        await Global.userRef.upsertUserPublic(
+            {...updatedUser, 'profilePhoto': _uploadedFileUrl});
+        Navigator.pushReplacementNamed(context, '/home');
+      } catch (e) {
+        FlutterActions.purpleSnackBarTop(context, 'Error submitting form!');
+      }
+    } else {
+      FlutterActions.purpleSnackBarTop(context, 'Form not valid!');
+    }
   }
 
   fieldSaveFunction(String key) {

@@ -53,6 +53,7 @@ class UserData<T> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore db = Firestore.instance;
   static const String collection = 'users';
+  static const String publicCollection = 'user-public';
 
   UserData();
 
@@ -64,13 +65,31 @@ class UserData<T> {
   ///
   /// Returns a [Stream] of the data in that document
   /// Returns a Stream of [null] if the document isn't found.
-  Stream<T> documentStream({String document: UserData.collection}) {
+  Stream<T> userDataStream({String document: UserData.collection}) {
     return (_auth.onAuthStateChanged).switchMap((user) {
       if (user != null) {
         Document<T> doc = Document<T>(path: '$collection/${user.uid}');
         return doc.streamData();
       } else {
         return Stream<T>.value(null);
+      }
+    });
+  }
+
+  /// Gets a stream of public facing user data from Firebase at [document]/userId
+  ///
+  /// Returns a [Stream] of the public user data
+  /// Returns a [Stream] of [null] if the document isn't found.
+  Stream<UserPublic> userPublicDataStream(
+      {String document: UserData.publicCollection}) {
+    return (_auth.onAuthStateChanged).switchMap((user) {
+      if (user != null) {
+
+        Document<UserPublic> doc = Document<UserPublic>(
+            path: 'user-public/${user.uid}');
+        return doc.streamData();
+      } else {
+        return Stream<UserPublic>.value(null);
       }
     });
   }
@@ -117,7 +136,15 @@ class UserData<T> {
 
   /// Upserts a user document with [data]
   Future<void> upsertUser(Map data) async {
-    Document<T> ref = Document(path: '$collection/${this.user.uid}');
+    FirebaseUser user = await _auth.currentUser();
+    Document<T> ref = Document(path: '$collection/${user.uid}');
+    return ref.upsert(data);
+  }
+
+  /// Upserts a user document with [data]
+  Future<void> upsertUserPublic(Map data) async {
+    FirebaseUser user = await _auth.currentUser();
+    Document<UserPublic> ref = Document(path: 'user-public/${user.uid}');
     return ref.upsert(data);
   }
 }

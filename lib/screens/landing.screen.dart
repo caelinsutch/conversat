@@ -91,7 +91,7 @@ class LandingScreen extends StatelessWidget {
     if (authRes == null) {
       FlutterActions.purpleSnackBarTop(context, 'Error logging in!');
     } else if (authRes == false) {
-      Navigator.popAndPushNamed(context, '/finish-signup');
+      Navigator.popAndPushNamed(context, '/signup');
     } else if (authRes == true) {
       Navigator.popAndPushNamed(context, '/home');
     }

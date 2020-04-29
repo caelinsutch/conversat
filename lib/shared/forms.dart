@@ -1,14 +1,13 @@
-import 'package:Conversat/styles/appcolors.dart';
 import 'package:Conversat/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FormFields {
-  static TextFormField genericFormField(BuildContext context,
+  static TextFormField genericFormField({BuildContext context,
       Function saveFunction, Function validatorFunction, String hint,
-      {bool obscure = false, int minLines,
+      bool obscure = false, int minLines,
         TextInputType keyboardType = TextInputType.text,
-        String initialValue = ''}) {
+        String initialValue = '', TextInputAction textInputAction}) {
     return TextFormField(
       obscureText: obscure,
       maxLines: null,
@@ -17,7 +16,8 @@ class FormFields {
       validator: validatorFunction,
       onSaved: saveFunction,
       initialValue: initialValue,
-      style: TextStyles.h3White,
+      textInputAction: textInputAction,
+      style: TextStyles.h3Black,
       decoration: InputDecoration(
         isDense: true,
         contentPadding:
